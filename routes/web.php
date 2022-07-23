@@ -1,8 +1,11 @@
 <?php
 
-use Illuminate\Foundation\Application;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GeneralController;
+use App\Http\Middleware\IsGuest;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Middleware\IsSessionAuth;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +22,13 @@ Route::get('/', function () {
     return redirect()->route("login");
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware([IsGuest::class])->group(function () {
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/login', [AuthController::class, 'store'])->name('login.store');
+});
 
-require __DIR__.'/auth.php';
+Route::middleware([IsSessionAuth::class])->group(function () {
+    Route::get('/dashboard', [GeneralController::class, 'dashboard'])->name('dashboard');
+    Route::get('/jabatan', [GeneralController::class, 'jabatan'])->name('jabatan');
+    Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
+});

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import Button from '@/Components/Button';
 import Checkbox from '@/Components/Checkbox';
 import Guest from '@/Layouts/Guest';
@@ -6,28 +6,44 @@ import Input from '@/Components/Input';
 import Label from '@/Components/Label';
 import ValidationErrors from '@/Components/ValidationErrors';
 import { Head, Link, useForm } from '@inertiajs/inertia-react';
+import { getAllUsers } from '@/Services/User';
+import { forEach } from 'lodash';
+import { Inertia } from '@inertiajs/inertia';
 
 export default function Login({ status, canResetPassword }) {
-    const { data, setData, post, processing, errors, reset } = useForm({
-        email: '',
+    const [isLoading, setLoading] = useState(false)
+    const [error, setError] = useState('')
+    const { data, setData, post } = useForm({
+        name: '',
+        username: '',
         password: '',
-        remember: '',
+        is_admin: ''
     });
-
-    useEffect(() => {
-        return () => {
-            reset('password');
-        };
-    }, []);
 
     const onHandleChange = (event) => {
         setData(event.target.name, event.target.type === 'checkbox' ? event.target.checked : event.target.value);
     };
 
+    const checkLogin = (users) => {
+        const user = users.find(item => item.username == data.username && item.password == data.password)
+        if (user) {
+            Inertia.post(route('login'), {
+                name: user.name,
+                username: user.username,
+                password: user.password,
+                is_admin: user.is_admin
+            })
+        } else {
+            setError('Username atau password tidak cocok')
+        }
+    }
+
     const submit = (e) => {
         e.preventDefault();
-
-        post(route('login'));
+        setLoading(true)
+        getAllUsers()
+            .then(items => checkLogin(items))
+            .finally(() => setLoading(false))
     };
 
     return (
@@ -36,16 +52,17 @@ export default function Login({ status, canResetPassword }) {
 
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
 
-            <ValidationErrors errors={errors} />
-
+            <div className='text-center my-5 text-red-600'>
+            {error}
+            </div>
             <form onSubmit={submit}>
                 <div>
-                    <Label forInput="email" value="Email" />
+                    <Label forInput="username" value="Username" />
 
                     <Input
                         type="text"
-                        name="email"
-                        value={data.email}
+                        name="username"
+                        value={data.username}
                         className="mt-1 block w-full"
                         autoComplete="username"
                         isFocused={true}
@@ -66,14 +83,6 @@ export default function Login({ status, canResetPassword }) {
                     />
                 </div>
 
-                <div className="block mt-4">
-                    <label className="flex items-center">
-                        <Checkbox name="remember" value={data.remember} handleChange={onHandleChange} />
-
-                        <span className="ml-2 text-sm text-gray-600">Remember me</span>
-                    </label>
-                </div>
-
                 <div className="flex items-center justify-end mt-4">
                     {canResetPassword && (
                         <Link
@@ -84,7 +93,7 @@ export default function Login({ status, canResetPassword }) {
                         </Link>
                     )}
 
-                    <Button className="ml-4" processing={processing}>
+                    <Button className="ml-4" processing={isLoading}>
                         Log in
                     </Button>
                 </div>

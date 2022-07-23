@@ -3,6 +3,7 @@ import Dropdown from '@/Components/Dropdown';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link } from '@inertiajs/inertia-react';
 
+
 export default function Authenticated({ auth, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
@@ -104,46 +105,56 @@ export default function Authenticated({ auth, children }) {
             </nav>
 
             <div className='flex flex-row md:mt-5 mx-5'>
-                <div className='w-auto'>
+                <div className='w-auto hidden md:block'>
                     <aside className="w-64" aria-label="Sidebar">
-                    <div className="overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-gray-800">
+                    <div className="overflow-y-auto py-4 px-3 bg-white rounded dark:bg-gray-800">
                         <ul className="space-y-2">
                             <li>
-                                <a href="#" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <Link href={route('dashboard')} className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <span className="ml-3">Dashboard</span>
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="#" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                <span className="flex-1 ml-3 whitespace-nowrap">Kanban</span>
-                                </a>
+                                <Link href={route('jabatan')} className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <span className="flex-1 ml-3 whitespace-nowrap">Jabatan</span>
+                                </Link>
                             </li>
                             <li>
-                                <a href="#" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                <span className="flex-1 ml-3 whitespace-nowrap">Inbox</span>
-                                </a>
+                                <Link href={route('dashboard')} className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <span className="flex-1 ml-3 whitespace-nowrap">Karyawan</span>
+                                </Link>
                             </li>
                             <li>
-                                <a href="#" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                <span className="flex-1 ml-3 whitespace-nowrap">Users</span>
-                                </a>
+                                <Link href={route('dashboard')} className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <span className="flex-1 ml-3 whitespace-nowrap">Data Absensi</span>
+                                </Link>
                             </li>
                             <li>
-                                <a href="#" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                <span className="flex-1 ml-3 whitespace-nowrap">Products</span>
-                                </a>
+                                <Link href={route('dashboard')} className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <span className="flex-1 ml-3 whitespace-nowrap">Setting Potongan Gaji</span>
+                                </Link>
                             </li>
                             <li>
-                                <a href="#" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                <span className="flex-1 ml-3 whitespace-nowrap">Sign In</span>
-                                </a>
+                                <Link href={route('dashboard')} className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <span className="flex-1 ml-3 whitespace-nowrap">Cetak Slip Gaji</span>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href={route('dashboard')} className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <span className="flex-1 ml-3 whitespace-nowrap">Cetak Laporan Gaji</span>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href={route('dashboard')} className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <span className="flex-1 ml-3 whitespace-nowrap">Cetak Laporan Presensi</span>
+                                </Link>
                             </li>
                         </ul>
                     </div>
                     </aside>
                 </div>
 
-                <div className='w-full'>
+                <div className='w-full pt-5 md:pt-0'>
                     <main>{children}</main>
                 </div>
             </div>
