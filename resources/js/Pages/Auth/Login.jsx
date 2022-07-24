@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '@/Components/Button';
-import Checkbox from '@/Components/Checkbox';
 import Guest from '@/Layouts/Guest';
 import Input from '@/Components/Input';
 import Label from '@/Components/Label';
-import ValidationErrors from '@/Components/ValidationErrors';
 import { Head, Link, useForm } from '@inertiajs/inertia-react';
 import { getAllUsers } from '@/Services/User';
-import { forEach } from 'lodash';
 import { Inertia } from '@inertiajs/inertia';
+import { create } from '@/Services/Karyawan';
 
 export default function Login({ status, canResetPassword }) {
     const [isLoading, setLoading] = useState(false)
@@ -45,6 +43,30 @@ export default function Login({ status, canResetPassword }) {
             .then(items => checkLogin(items))
             .finally(() => setLoading(false))
     };
+
+    useEffect(() => {
+        // create default user
+        getAllUsers()
+        .then(items => {
+            if(items.length <= 0) {
+                create({
+                    nik: "1234567890",
+                    name: "admin",
+                    username: "admin",
+                    password: "admin",
+                    jabatan: {
+                        id: "1",
+                        nama: "admin",
+                        tunjangan: "0",
+                    },
+                    jenisKelamin: "Laki-Laki",
+                    status: "Karyawan Tetap",
+                    is_admin: "true",
+                })
+            }
+        })
+        
+    }, [])
 
     return (
         <Guest>

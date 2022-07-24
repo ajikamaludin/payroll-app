@@ -4,10 +4,10 @@ import { Head } from '@inertiajs/inertia-react';
 import { useModalState } from '@/Hooks'
 import Button from '@/Components/Button';
 import FormModal from './FormModal';
-import { getAll, deleteById } from '@/Services/Jabatan';
+import { getAll, deleteById } from '@/Services/Karyawan';
 import { toast } from 'react-toastify';
 
-export default function Jabatan(props) {
+export default function Karyawan(props) {
     const formModal = useModalState(false)
     const [items, setItems] = useState([])
 
@@ -54,7 +54,7 @@ export default function Jabatan(props) {
                                                 Nama
                                             </th>
                                             <th scope="col" className="py-3 px-6">
-                                                Tunjangan
+                                                Jabatan
                                             </th>
                                             <th></th>
                                         </tr>
@@ -63,15 +63,17 @@ export default function Jabatan(props) {
                                         {items.map(item => (
                                             <tr key={item.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                                 <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                    {item.data.nama}
+                                                    {item.data.name}
                                                 </th>
                                                 <td className="py-4 px-6">
-                                                    Rp. {item.data.tunjangan}
+                                                    {item.data.jabatan.nama}
                                                 </td>
                                                 <th>
                                                     <div className='flex space-x-1'> 
                                                     <Button onClick={() => handleEditClick(item)}>Edit</Button>
-                                                    <Button onClick={() => hanldeDeleteClick(item)}>Hapus</Button>
+                                                    {item.data.jabatan.id != "1" && (
+                                                        <Button onClick={() => hanldeDeleteClick(item)}>Hapus</Button>
+                                                    )}
                                                     </div>
                                                 </th>
                                             </tr>
