@@ -35,5 +35,6 @@ Route::middleware([IsSessionAuth::class])->group(function () {
     Route::get('/setting-potong-gaji', [GeneralController::class, 'settingPotongGaji'])->name('setting.potongan.gaji');
     Route::get('/data-gaji', [GeneralController::class, 'dataGaji'])->name('gaji');
     Route::get('/slip-gaji', [GeneralController::class, 'slipGaji'])->name('slip.gaji');
+    Route::get('/user-gaji', [GeneralController::class, 'userGaji'])->name('user.gaji');
     Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
 });

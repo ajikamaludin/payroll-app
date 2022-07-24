@@ -29,7 +29,8 @@ export default function Login({ status, canResetPassword }) {
                 name: user.name,
                 username: user.username,
                 password: user.password,
-                is_admin: user.is_admin
+                is_admin: user.is_admin,
+                id: user.id
             })
         } else {
             setError('Username atau password tidak cocok')

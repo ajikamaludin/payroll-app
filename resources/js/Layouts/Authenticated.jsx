@@ -84,6 +84,7 @@ export default function Authenticated({ auth, children }) {
                 </div>
 
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
+                    {auth.user.is_admin ? (
                     <div className="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
                             Dashboard
@@ -107,6 +108,16 @@ export default function Authenticated({ auth, children }) {
                             Slip Gaji
                         </ResponsiveNavLink>
                     </div>
+                    ) : (
+                        <div className="pt-2 pb-3 space-y-1">
+                            <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
+                                Dashboard
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink href={route('user.gaji')} active={route().current('user.gaji')}>
+                                Data Gaji
+                            </ResponsiveNavLink>
+                        </div>
+                    )}
 
                     <div className="pt-4 pb-1 border-t border-gray-200">
                         <div className="px-4">
@@ -126,45 +137,63 @@ export default function Authenticated({ auth, children }) {
             <div className='flex flex-row md:mt-5 mx-au max-w-7xl mx-auto'>
                 <div className='w-auto hidden md:block'>
                     <aside className="w-64" aria-label="Sidebar">
-                    <div className="overflow-y-auto py-4 px-3 bg-white rounded dark:bg-gray-800">
-                        <ul className="space-y-2">
-                            <li>
-                                <Link href={route('dashboard')} className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white ${route().current('dashboard') ? 'bg-gray-100' : 'hover:bg-gray-100'} dark:hover:bg-gray-700`}>
-                                <span className="ml-3">Dashboard</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href={route('jabatan')} className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white ${route().current('jabatan') ? 'bg-gray-100' : 'hover:bg-gray-100'} dark:hover:bg-gray-700`}>
-                                <span className="flex-1 ml-3 whitespace-nowrap">Jabatan</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href={route('karyawan')} className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white ${route().current('karyawan') ? 'bg-gray-100' : 'hover:bg-gray-100'} dark:hover:bg-gray-700`}>
-                                <span className="flex-1 ml-3 whitespace-nowrap">Karyawan</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href={route('absensi')} className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white ${route().current('absensi') ? 'bg-gray-100' : 'hover:bg-gray-100'} dark:hover:bg-gray-700`}>
-                                <span className="flex-1 ml-3 whitespace-nowrap">Data Absensi</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href={route('setting.potongan.gaji')} className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white ${route().current('setting.potongan.gaji') ? 'bg-gray-100' : 'hover:bg-gray-100'} dark:hover:bg-gray-700`}>
-                                <span className="flex-1 ml-3 whitespace-nowrap">Setting Potongan Gaji</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href={route('gaji')} className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white ${route().current('gaji') ? 'bg-gray-100' : 'hover:bg-gray-100'} dark:hover:bg-gray-700`}>
-                                <span className="flex-1 ml-3 whitespace-nowrap">Data Gaji</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href={route('slip.gaji')} className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white ${route().current('slip.gaji') ? 'bg-gray-100' : 'hover:bg-gray-100'} dark:hover:bg-gray-700`}>
-                                <span className="flex-1 ml-3 whitespace-nowrap">Slip Gaji</span>
-                                </Link>
-                            </li>
-                        </ul>
-                    </div>
+                        {auth.user.is_admin ? (
+                        <div className="overflow-y-auto py-4 px-3 bg-white rounded dark:bg-gray-800">
+                            <ul className="space-y-2">
+                                <li>
+                                    <Link href={route('dashboard')} className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white ${route().current('dashboard') ? 'bg-gray-100' : 'hover:bg-gray-100'} dark:hover:bg-gray-700`}>
+                                    <span className="ml-3">Dashboard</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href={route('jabatan')} className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white ${route().current('jabatan') ? 'bg-gray-100' : 'hover:bg-gray-100'} dark:hover:bg-gray-700`}>
+                                    <span className="flex-1 ml-3 whitespace-nowrap">Jabatan</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href={route('karyawan')} className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white ${route().current('karyawan') ? 'bg-gray-100' : 'hover:bg-gray-100'} dark:hover:bg-gray-700`}>
+                                    <span className="flex-1 ml-3 whitespace-nowrap">Karyawan</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href={route('absensi')} className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white ${route().current('absensi') ? 'bg-gray-100' : 'hover:bg-gray-100'} dark:hover:bg-gray-700`}>
+                                    <span className="flex-1 ml-3 whitespace-nowrap">Data Absensi</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href={route('setting.potongan.gaji')} className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white ${route().current('setting.potongan.gaji') ? 'bg-gray-100' : 'hover:bg-gray-100'} dark:hover:bg-gray-700`}>
+                                    <span className="flex-1 ml-3 whitespace-nowrap">Setting Potongan Gaji</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href={route('gaji')} className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white ${route().current('gaji') ? 'bg-gray-100' : 'hover:bg-gray-100'} dark:hover:bg-gray-700`}>
+                                    <span className="flex-1 ml-3 whitespace-nowrap">Data Gaji</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href={route('slip.gaji')} className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white ${route().current('slip.gaji') ? 'bg-gray-100' : 'hover:bg-gray-100'} dark:hover:bg-gray-700`}>
+                                    <span className="flex-1 ml-3 whitespace-nowrap">Slip Gaji</span>
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
+                        ) : (
+                            <div className="overflow-y-auto py-4 px-3 bg-white rounded dark:bg-gray-800">
+                            <ul className="space-y-2">
+                                <li>
+                                    <Link href={route('dashboard')} className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white ${route().current('dashboard') ? 'bg-gray-100' : 'hover:bg-gray-100'} dark:hover:bg-gray-700`}>
+                                    <span className="ml-3">Dashboard</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href={route('user.gaji')} className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white ${route().current('user.gaji') ? 'bg-gray-100' : 'hover:bg-gray-100'} dark:hover:bg-gray-700`}>
+                                    <span className="flex-1 ml-3 whitespace-nowrap">Data Gaji</span>
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
+                        )}
+
                     </aside>
                 </div>
 

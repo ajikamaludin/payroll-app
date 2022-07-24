@@ -41,4 +41,9 @@ class GeneralController extends Controller
     {
         return Inertia::render('Gaji/Slip');
     }
+
+    public function userGaji()
+    {
+        return Inertia::render('Gaji/UserGaji');
+    }
 }
