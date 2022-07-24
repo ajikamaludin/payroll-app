@@ -23,6 +23,7 @@
         "vite": "^3.0.0"
     },
     "dependencies": {
-        "firebase": "^9.9.1"
+        "firebase": "^9.9.1",
+        "react-toastify": "^9.0.7"
     }
 }

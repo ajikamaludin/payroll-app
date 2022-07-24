@@ -14,6 +14,6 @@ class GeneralController extends Controller
 
     public function jabatan()
     {
-        return Inertia::render('Jabatan');
+        return Inertia::render('Jabatan/Index');
     }
 }

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer } from 'react-toastify'
 import Dropdown from '@/Components/Dropdown';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link } from '@inertiajs/inertia-react';
@@ -6,7 +8,6 @@ import { Link } from '@inertiajs/inertia-react';
 
 export default function Authenticated({ auth, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
-
     return (
         <div className="min-h-screen bg-gray-100">
             <nav className="bg-white border-b border-gray-100">
@@ -15,7 +16,7 @@ export default function Authenticated({ auth, children }) {
                         <div className="flex">
                             <div className="shrink-0 flex items-center">
                                 <Link href="/" className='text-3xl font-bold'>
-                                    Payroll App
+                                    Koro Koro Family Karaoke
                                 </Link>
                             </div>
                         </div>
@@ -158,6 +159,17 @@ export default function Authenticated({ auth, children }) {
                     <main>{children}</main>
                 </div>
             </div>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                rtl={false}
+                closeOnClick
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </div>
     );
 }
