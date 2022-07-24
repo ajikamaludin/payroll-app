@@ -4,19 +4,19 @@ import { Head, useForm } from '@inertiajs/inertia-react';
 import { useModalState } from '@/Hooks'
 import Button from '@/Components/Button';
 import FormModal from './FormModal';
+import { getDataGaji } from '@/Services/DataGaji';
 import { useReactToPrint } from 'react-to-print';
-import { getByPeriode } from '@/Services/Absensi';
-import { toast } from 'react-toastify';
+import { formatIDR } from '@/Utils';
 
-const ComponentToPrint = React.forwardRef(({ absensi, month, year }, ref) => {
+const ComponentToPrint = React.forwardRef(({ items, month, year }, ref) => {
     const date = new Date()
     return (
         <div ref={ref} className="p-5 print-only">
             <div className='w-full text-center p-2'>
                 <p className='font-bold text-3xl'>Koro Koro Family Karaoke</p>
-                <p className='text-xl'>Periode Absen Bulan {month} Tahun {year}</p>
+                <p className='text-xl'>Periode Gaji Bulan {month} Tahun {year}</p>
             </div>
-            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-5">
+            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-5 block whitespace-nowrap">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" className="py-3 px-6">
@@ -25,40 +25,70 @@ const ComponentToPrint = React.forwardRef(({ absensi, month, year }, ref) => {
                         <th scope="col" className="py-3 px-6">
                             Nama
                         </th>
-                        <th scope="col" className="py-3 px-6">
-                            Jenis Kelamin
-                        </th>
-                        <th scope="col" className="py-3 px-6">
+                        <th>
                             Jabatan
                         </th>
-                        <th scope="col" className="py-3 px-6">Hadir</th>
-                        <th scope="col" className="py-3 px-6">Sakit</th>
-                        <th scope="col" className="py-3 px-6">Alfa</th>
+                        <th scope="col" className='px-2'>
+                            Gaji Pokok
+                        </th>
+                        <th scope="col" className='px-2'>
+                            Tunjangan
+                        </th>
+                        <th scope="col" className='px-2'>
+                            Fee Penjualan
+                        </th>
+                        <th scope="col" className='px-2'>
+                            Uang Transport
+                        </th>
+                        <th scope="col" className='px-2'>
+                            Uang Makan
+                        </th>
+                        <th scope="col" className='px-2'>
+                            Bonus
+                        </th>
+                        <th scope="col" className='px-2'>
+                            Potongan
+                        </th>
+                        <th scope="col" className='px-2'>
+                            Total
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {absensi.data?.users?.map(item => (
+                    {items.map(item => (
                         <tr key={item.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                             <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {item.nik}
                             </th>
-                            <td className="py-4 px-6">
+                            <td>
                                 {item.name}
                             </td>
-                            <td className="py-4 px-6">
-                                {item.jenisKelamin}
-                            </td>
-                            <td className="py-4 px-6">
+                            <td>
                                 {item.jabatan}
                             </td>
                             <td>
-                                {item.hadir} 
+                                Rp. {formatIDR(item.gajiPokok)}
                             </td>
                             <td>
-                                {item.sakit}
+                                Rp. {formatIDR(item.tunjangan)}
                             </td>
                             <td>
-                                {item.alfa}
+                                Rp. {formatIDR(item.feePenjualan)}
+                            </td>
+                            <td>
+                                Rp. {formatIDR(item.transport)}
+                            </td>
+                            <td>
+                                Rp. {formatIDR(item.uangMakan)}
+                            </td>
+                            <td>
+                                Rp. {formatIDR(item.bonus)}
+                            </td>
+                            <td>
+                                Rp. {formatIDR(item.potongan)}
+                            </td>
+                            <td>
+                                Rp. {formatIDR(item.total)}
                             </td>
                         </tr>
                     ))}
@@ -75,7 +105,7 @@ const ComponentToPrint = React.forwardRef(({ absensi, month, year }, ref) => {
     )
 })
 
-export default function Karyawan(props) {
+export default function Gaji(props) {
     const formModal = useModalState(false)
     
     const componentRef = useRef();
@@ -102,17 +132,9 @@ export default function Karyawan(props) {
         )
     }
 
-    const [absensi, setAbsensi] = useState({})
+    const [items, setItems] = useState([])
     const onClickShow = () => {
-        setAbsensi({})
-        getByPeriode(`${data.month}_${data.year}`)
-        .then(items => {
-            if(items.length <= 0) {
-                toast.error("No data found")
-                return
-            }
-            setAbsensi(items[0])
-        })
+        getDataGaji(`${data.month}_${data.year}`,  setItems)
     }
 
     return (
@@ -120,14 +142,14 @@ export default function Karyawan(props) {
             auth={props.auth}
             errors={props.errors}
         >
-            <Head title="Absensi" />
+            <Head title="Data Gaji" />
 
             <div className="py-0">
-                <div className="max-w-7xl sm:px-6">
+                <div className="max-w-3xl xl:max-w-7xl w-full sm:px-6">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 bg-white border-b border-gray-200">
                             <div className='mb-5 text-3xl font-semibold'>
-                                Absensi
+                                Data Gaji
                             </div>
                             <div className='flex flex-col md:flex-row space-y-1 md:space-y-0 justify-between'>
                                 <div className='flex space-x-1 items-center'>
@@ -147,10 +169,10 @@ export default function Karyawan(props) {
                                 </div>
                                 <div className='flex space-x-1'>
                                     <Button onClick={onClickShow}>Tampilkan Data</Button>
-                                    <Button onClick={formModal.toggle}>Tambah Absensi</Button>
                                 </div>
                             </div>
-                            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-5">
+                            <ComponentToPrint ref={componentRef} items={items} month={data.month} year={data.year}/>
+                            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-5 block overflow-x-auto whitespace-nowrap">
                                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                     <tr>
                                         <th scope="col" className="py-3 px-6">
@@ -159,19 +181,37 @@ export default function Karyawan(props) {
                                         <th scope="col" className="py-3 px-6">
                                             Nama
                                         </th>
-                                        <th scope="col" className="py-3 px-6">
-                                            Jenis Kelamin
-                                        </th>
-                                        <th scope="col" className="py-3 px-6">
+                                        <th>
                                             Jabatan
                                         </th>
-                                        <th scope="col" className="py-3 px-6">Hadir</th>
-                                        <th scope="col" className="py-3 px-6">Sakit</th>
-                                        <th scope="col" className="py-3 px-6">Alfa</th>
+                                        <th scope="col" className='px-2'>
+                                            Gaji Pokok
+                                        </th>
+                                        <th scope="col" className='px-2'>
+                                            Tunjangan
+                                        </th>
+                                        <th scope="col" className='px-2'>
+                                            Fee Penjualan
+                                        </th>
+                                        <th scope="col" className='px-2'>
+                                            Uang Transport
+                                        </th>
+                                        <th scope="col" className='px-2'>
+                                            Uang Makan
+                                        </th>
+                                        <th scope="col" className='px-2'>
+                                            Bonus
+                                        </th>
+                                        <th scope="col" className='px-2'>
+                                            Potongan
+                                        </th>
+                                        <th scope="col" className='px-2'>
+                                            Total
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {absensi.data?.users?.map(item => (
+                                    {items.map(item => (
                                         <tr key={item.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                             <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                 {item.nik}
@@ -180,26 +220,37 @@ export default function Karyawan(props) {
                                                 {item.name}
                                             </td>
                                             <td className="py-4 px-6">
-                                                {item.jenisKelamin}
-                                            </td>
-                                            <td className="py-4 px-6">
                                                 {item.jabatan}
                                             </td>
                                             <td>
-                                                {item.hadir} 
+                                                Rp. {formatIDR(item.gajiPokok)}
                                             </td>
                                             <td>
-                                                {item.sakit}
+                                                Rp. {formatIDR(item.tunjangan)}
                                             </td>
                                             <td>
-                                                {item.alfa}
+                                                Rp. {formatIDR(item.feePenjualan)}
+                                            </td>
+                                            <td>
+                                                Rp. {formatIDR(item.transport)}
+                                            </td>
+                                            <td>
+                                                Rp. {formatIDR(item.uangMakan)}
+                                            </td>
+                                            <td>
+                                                Rp. {formatIDR(item.bonus)}
+                                            </td>
+                                            <td>
+                                                Rp. {formatIDR(item.potongan)}
+                                            </td>
+                                            <td>
+                                                Rp. {formatIDR(item.total)}
                                             </td>
                                         </tr>
                                     ))}
                                 </tbody>
                             </table>
-                            <ComponentToPrint ref={componentRef} absensi={absensi} month={data.month} year={data.year}/>
-                            {absensi.data?.users?.length > 0 && (
+                            {items.length > 0 && (
                                 <div className='flex justify-end'>
                                     <Button onClick={handlePrint} className="mt-2">Cetak</Button>
                                 </div>

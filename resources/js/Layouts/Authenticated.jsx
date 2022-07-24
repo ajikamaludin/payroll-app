@@ -88,6 +88,24 @@ export default function Authenticated({ auth, children }) {
                         <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
                             Dashboard
                         </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('jabatan')} active={route().current('jabatan')}>
+                            Jabatan
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('karyawan')} active={route().current('karyawan')}>
+                            Karyawan
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('absensi')} active={route().current('absensi')}>
+                            Data Absesnsi
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('setting.potongan.gaji')} active={route().current('setting.potongan.gaji')}>
+                            Setting Potongan Gaji
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('gaji')} active={route().current('gaji')}>
+                            Data Gaji
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('slip.gaji')} active={route().current('slip.gaji')}>
+                            Slip Gaji
+                        </ResponsiveNavLink>
                     </div>
 
                     <div className="pt-4 pb-1 border-t border-gray-200">
@@ -136,18 +154,13 @@ export default function Authenticated({ auth, children }) {
                                 </Link>
                             </li>
                             <li>
-                                <Link href={route('dashboard')} className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white ${route().current('cetak.slip.gaji') ? 'bg-gray-100' : 'hover:bg-gray-100'} dark:hover:bg-gray-700`}>
+                                <Link href={route('gaji')} className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white ${route().current('gaji') ? 'bg-gray-100' : 'hover:bg-gray-100'} dark:hover:bg-gray-700`}>
                                 <span className="flex-1 ml-3 whitespace-nowrap">Data Gaji</span>
                                 </Link>
                             </li>
                             <li>
-                                <Link href={route('dashboard')} className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white ${route().current('cetak.laporan.gaji') ? 'bg-gray-100' : 'hover:bg-gray-100'} dark:hover:bg-gray-700`}>
-                                <span className="flex-1 ml-3 whitespace-nowrap">Cetak Laporan Gaji</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href={route('dashboard')} className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white ${route().current('cetak.laporan.presensi') ? 'bg-gray-100' : 'hover:bg-gray-100'} dark:hover:bg-gray-700`}>
-                                <span className="flex-1 ml-3 whitespace-nowrap">Cetak Laporan Presensi</span>
+                                <Link href={route('slip.gaji')} className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white ${route().current('slip.gaji') ? 'bg-gray-100' : 'hover:bg-gray-100'} dark:hover:bg-gray-700`}>
+                                <span className="flex-1 ml-3 whitespace-nowrap">Slip Gaji</span>
                                 </Link>
                             </li>
                         </ul>

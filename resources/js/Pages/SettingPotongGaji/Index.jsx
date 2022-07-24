@@ -4,7 +4,7 @@ import { Head } from '@inertiajs/inertia-react';
 import { useModalState } from '@/Hooks'
 import Button from '@/Components/Button';
 import FormModal from './FormModal';
-import { getAll } from '@/Services/SettingPotonganGaji';
+import { getAll, deleteById } from '@/Services/SettingPotonganGaji';
 import { toast } from 'react-toastify';
 import { formatIDR } from '@/Utils';
 
@@ -30,7 +30,6 @@ export default function Karyawan(props) {
     const fetchData = () => {
         getAll()
         .then(items => {
-            console.log(items)
             setItems(items)
         })
     }

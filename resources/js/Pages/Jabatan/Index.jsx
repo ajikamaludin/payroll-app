@@ -43,7 +43,7 @@ export default function Jabatan(props) {
             <Head title="Jabatan" />
 
             <div className="py-0">
-                <div className="max-w-7xl sm:px-6">
+                <div className="max-w-3xl lg:max-w-5xl sm:px-6">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 bg-white border-b border-gray-200">
                             <div className='mb-5 text-3xl font-semibold'>
@@ -51,7 +51,7 @@ export default function Jabatan(props) {
                             </div>
                             <Button onClick={formModal.toggle}>Tambah</Button>
                             <div className="overflow-x-auto relative pt-5">
-                                <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                                <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 overflow-x-auto whitespace-nowrap block">
                                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                         <tr>
                                             <th scope="col" className="py-3 px-6">

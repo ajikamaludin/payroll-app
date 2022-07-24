@@ -31,4 +31,14 @@ class GeneralController extends Controller
     {
         return Inertia::render('SettingPotongGaji/Index');
     }
+
+    public function dataGaji()
+    {
+        return Inertia::render('Gaji/Index');
+    }
+
+    public function slipGaji()
+    {
+        return Inertia::render('Gaji/Slip');
+    }
 }

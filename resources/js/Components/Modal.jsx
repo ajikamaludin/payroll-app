@@ -1,13 +1,14 @@
 import React from 'react'
 
-export function Modal({ isOpen, toggleModal = () => {}, children, size = 'lg' }) {
+export function Modal({ isOpen, toggleModal = () => {}, children, size = "md" }) {
+
     return (
         <div
             className={`overflow-y-auto overflow-x-hidden bg-opacity-50 dark:bg-opacity-50 bg-gray-500 dark:bg-gray-400 fixed flex right-0 left-0 top-0 z-50 justify-center items-center h-full md:inset-0 ${
                 isOpen ? 'visible' : 'hidden'
             }`}
         >
-            <div className={`md:relative fixed bottom-0 md:px-4 w-full max-w-${size} h-auto`}>
+            <div className={`md:relative fixed bottom-0 md:px-4 w-full ${size == 'md' ? 'max-w-md' : 'max-w-4xl'} h-auto`}>
                 <div className="relative overflow-y-auto max-h-screen bg-white rounded-b-none rounded-t-lg md:rounded-lg shadow dark:bg-gray-800 pb-10 md:pb-0 ">
                     <div className="flex justify-end p-2">
                         <button

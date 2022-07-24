@@ -27,7 +27,6 @@ async function update(payload, id){
 }
 
 async function deleteById(id) {
-  console.log(id)
   const docRef = doc(db, COLLECTION, id)
   const result = await deleteDoc(docRef);
   return result
