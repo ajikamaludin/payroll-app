@@ -1,7 +1,7 @@
 import db from "@/firebase";
 import { collection, getDocs, doc, addDoc, deleteDoc, updateDoc } from "firebase/firestore";
 
-const COLLECTION = "jabatan"
+const COLLECTION = "setting.potongan.gaji"
 
 async function getAll() {
   const collect = collection(db, COLLECTION)
@@ -9,21 +9,6 @@ async function getAll() {
   const lists = data.docs.map(doc => { 
     return {
       data: doc.data(),
-      id: doc.id
-    }
-  })
-  return lists
-}
-
-async function getByNama(nama) {
-  const collect = query(collection(db, COLLECTION), where("nama", "==", nama))
-  const data = await getDocs(collect)
-  if (data.size <= 0) {
-    return []
-  }
-  const lists = data.docs.map(doc => { 
-    return {
-      ...doc.data(),
       id: doc.id
     }
   })

@@ -32,5 +32,6 @@ Route::middleware([IsSessionAuth::class])->group(function () {
     Route::get('/jabatan', [GeneralController::class, 'jabatan'])->name('jabatan');
     Route::get('/karyawan', [GeneralController::class, 'karyawan'])->name('karyawan');
     Route::get('/absensi', [GeneralController::class, 'absensi'])->name('absensi');
+    Route::get('/setting-potong-gaji', [GeneralController::class, 'settingPotongGaji'])->name('setting.potongan.gaji');
     Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
 });

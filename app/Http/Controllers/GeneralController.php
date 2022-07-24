@@ -26,4 +26,9 @@ class GeneralController extends Controller
     {
         return Inertia::render('Absensi/Index');
     }
+
+    public function settingPotongGaji()
+    {
+        return Inertia::render('SettingPotongGaji/Index');
+    }
 }

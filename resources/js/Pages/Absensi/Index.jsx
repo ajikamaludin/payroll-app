@@ -53,6 +53,9 @@ export default function Karyawan(props) {
                 <div className="max-w-7xl sm:px-6">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 bg-white border-b border-gray-200">
+                            <div className='mb-5 text-3xl font-semibold'>
+                                Absensi
+                            </div>
                             <div className='flex flex-col md:flex-row space-y-1 md:space-y-0 justify-between'>
                                 <div className='flex space-x-1 items-center'>
                                     <p>Periode Data :</p>

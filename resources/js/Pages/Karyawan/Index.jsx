@@ -45,6 +45,9 @@ export default function Karyawan(props) {
                 <div className="max-w-7xl sm:px-6">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 bg-white border-b border-gray-200">
+                            <div className='mb-5 text-3xl font-semibold'>
+                                Karyawan
+                            </div>
                             <Button onClick={formModal.toggle}>Tambah</Button>
                             <div className="overflow-x-auto relative pt-5">
                                 <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -68,14 +71,14 @@ export default function Karyawan(props) {
                                                 <td className="py-4 px-6">
                                                     {item.data.jabatan.nama}
                                                 </td>
-                                                <th>
+                                                <td>
                                                     <div className='flex space-x-1'> 
                                                     <Button onClick={() => handleEditClick(item)}>Edit</Button>
                                                     {item.data.jabatan.id != "1" && (
                                                         <Button onClick={() => hanldeDeleteClick(item)}>Hapus</Button>
                                                     )}
                                                     </div>
-                                                </th>
+                                                </td>
                                             </tr>
                                         ))}
                                     </tbody>

@@ -7,7 +7,7 @@ import Input from '@/Components/Input'
 import { getAll } from '@/Services/Karyawan'
 import { create } from '@/Services/Absensi'
 
-export default function FormModal({ modalState, periode, refresh }) {
+export default function FormModal({ modalState, periode }) {
     const [loading, setLoading] = useState(false)
     const { data, setData,  reset } = useForm({
         users: []
@@ -53,6 +53,7 @@ export default function FormModal({ modalState, periode, refresh }) {
         .then(() => {
             reset()
             modalState.toggle()
+            toast.success("berhasil menambahkan absensi")
         })
         .finally(() => setLoading(false))
     }

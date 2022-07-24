@@ -105,48 +105,48 @@ export default function Authenticated({ auth, children }) {
                 </div>
             </nav>
 
-            <div className='flex flex-row md:mt-5 mx-auto max-w-7xl'>
+            <div className='flex flex-row md:mt-5 mx-au max-w-7xl mx-auto'>
                 <div className='w-auto hidden md:block'>
                     <aside className="w-64" aria-label="Sidebar">
                     <div className="overflow-y-auto py-4 px-3 bg-white rounded dark:bg-gray-800">
                         <ul className="space-y-2">
                             <li>
-                                <Link href={route('dashboard')} className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <Link href={route('dashboard')} className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white ${route().current('dashboard') ? 'bg-gray-100' : 'hover:bg-gray-100'} dark:hover:bg-gray-700`}>
                                 <span className="ml-3">Dashboard</span>
                                 </Link>
                             </li>
                             <li>
-                                <Link href={route('jabatan')} className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <Link href={route('jabatan')} className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white ${route().current('jabatan') ? 'bg-gray-100' : 'hover:bg-gray-100'} dark:hover:bg-gray-700`}>
                                 <span className="flex-1 ml-3 whitespace-nowrap">Jabatan</span>
                                 </Link>
                             </li>
                             <li>
-                                <Link href={route('karyawan')} className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <Link href={route('karyawan')} className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white ${route().current('karyawan') ? 'bg-gray-100' : 'hover:bg-gray-100'} dark:hover:bg-gray-700`}>
                                 <span className="flex-1 ml-3 whitespace-nowrap">Karyawan</span>
                                 </Link>
                             </li>
                             <li>
-                                <Link href={route('absensi')} className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <Link href={route('absensi')} className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white ${route().current('absensi') ? 'bg-gray-100' : 'hover:bg-gray-100'} dark:hover:bg-gray-700`}>
                                 <span className="flex-1 ml-3 whitespace-nowrap">Data Absensi</span>
                                 </Link>
                             </li>
                             <li>
-                                <Link href={route('dashboard')} className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <Link href={route('setting.potongan.gaji')} className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white ${route().current('setting.potongan.gaji') ? 'bg-gray-100' : 'hover:bg-gray-100'} dark:hover:bg-gray-700`}>
                                 <span className="flex-1 ml-3 whitespace-nowrap">Setting Potongan Gaji</span>
                                 </Link>
                             </li>
                             <li>
-                                <Link href={route('dashboard')} className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                <span className="flex-1 ml-3 whitespace-nowrap">Cetak Slip Gaji</span>
+                                <Link href={route('dashboard')} className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white ${route().current('cetak.slip.gaji') ? 'bg-gray-100' : 'hover:bg-gray-100'} dark:hover:bg-gray-700`}>
+                                <span className="flex-1 ml-3 whitespace-nowrap">Data Gaji</span>
                                 </Link>
                             </li>
                             <li>
-                                <Link href={route('dashboard')} className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <Link href={route('dashboard')} className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white ${route().current('cetak.laporan.gaji') ? 'bg-gray-100' : 'hover:bg-gray-100'} dark:hover:bg-gray-700`}>
                                 <span className="flex-1 ml-3 whitespace-nowrap">Cetak Laporan Gaji</span>
                                 </Link>
                             </li>
                             <li>
-                                <Link href={route('dashboard')} className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <Link href={route('dashboard')} className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white ${route().current('cetak.laporan.presensi') ? 'bg-gray-100' : 'hover:bg-gray-100'} dark:hover:bg-gray-700`}>
                                 <span className="flex-1 ml-3 whitespace-nowrap">Cetak Laporan Presensi</span>
                                 </Link>
                             </li>
