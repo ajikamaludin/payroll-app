@@ -31,5 +31,6 @@ Route::middleware([IsSessionAuth::class])->group(function () {
     Route::get('/dashboard', [GeneralController::class, 'dashboard'])->name('dashboard');
     Route::get('/jabatan', [GeneralController::class, 'jabatan'])->name('jabatan');
     Route::get('/karyawan', [GeneralController::class, 'karyawan'])->name('karyawan');
+    Route::get('/absensi', [GeneralController::class, 'absensi'])->name('absensi');
     Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
 });

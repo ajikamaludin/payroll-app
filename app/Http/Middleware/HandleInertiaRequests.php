@@ -35,6 +35,11 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request)
     {
         return array_merge(parent::share($request), [
+            'app_creator' => [
+                'nama' => 'Aji Kamaludin',
+                'email' => 'aji.kamaludin2021@gmail.com',
+                'github' => 'github.com/ajikamaludin'
+            ],
             'auth' => [
                 'user' => session('user'),
             ],

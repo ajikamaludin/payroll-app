@@ -6,6 +6,7 @@ import Button from '@/Components/Button';
 import FormModal from './FormModal';
 import { getAll, deleteById } from '@/Services/Jabatan';
 import { toast } from 'react-toastify';
+import { formatIDR } from '@/Utils';
 
 export default function Jabatan(props) {
     const formModal = useModalState(false)
@@ -54,7 +55,25 @@ export default function Jabatan(props) {
                                                 Nama
                                             </th>
                                             <th scope="col" className="py-3 px-6">
+                                                Gaji Pokok
+                                            </th>
+                                            <th scope="col" className="py-3 px-6">
                                                 Tunjangan
+                                            </th>
+                                            <th scope="col" className="py-3 px-6">
+                                                Fee Penjualan
+                                            </th>
+                                            <th scope="col" className="py-3 px-6">
+                                                Tunjangan Transport
+                                            </th>
+                                            <th scope="col" className="py-3 px-6">
+                                                Uang Makan
+                                            </th>
+                                            <th scope="col" className="py-3 px-6">
+                                                Bonus
+                                            </th>
+                                            <th scope="col" className="py-3 px-6">
+                                                Total
                                             </th>
                                             <th></th>
                                         </tr>
@@ -66,7 +85,25 @@ export default function Jabatan(props) {
                                                     {item.data.nama}
                                                 </th>
                                                 <td className="py-4 px-6">
-                                                    Rp. {item.data.tunjangan}
+                                                    Rp. {formatIDR(item.data.gajiPokok)}
+                                                </td>
+                                                <td className="py-4 px-6">
+                                                    Rp. {formatIDR(item.data.tunjangan)}
+                                                </td>
+                                                <td className="py-4 px-6">
+                                                    Rp. {formatIDR(item.data.feePenjualan)}
+                                                </td>
+                                                <td className="py-4 px-6">
+                                                    Rp. {formatIDR(item.data.transport)}
+                                                </td>
+                                                <td className="py-4 px-6">
+                                                    Rp. {formatIDR(item.data.uangMakan)}
+                                                </td>
+                                                <td className="py-4 px-6">
+                                                    Rp. {formatIDR(item.data.bonus)}
+                                                </td>
+                                                <td className="py-4 px-6">
+                                                    Rp. {formatIDR(item.data.total)}
                                                 </td>
                                                 <th>
                                                     <div className='flex space-x-1'> 

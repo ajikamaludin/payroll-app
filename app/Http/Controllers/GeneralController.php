@@ -21,4 +21,9 @@ class GeneralController extends Controller
     {
         return Inertia::render('Karyawan/Index');
     }
+
+    public function absensi()
+    {
+        return Inertia::render('Absensi/Index');
+    }
 }

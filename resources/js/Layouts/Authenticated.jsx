@@ -105,7 +105,7 @@ export default function Authenticated({ auth, children }) {
                 </div>
             </nav>
 
-            <div className='flex flex-row md:mt-5 mx-5'>
+            <div className='flex flex-row md:mt-5 mx-auto max-w-7xl'>
                 <div className='w-auto hidden md:block'>
                     <aside className="w-64" aria-label="Sidebar">
                     <div className="overflow-y-auto py-4 px-3 bg-white rounded dark:bg-gray-800">
@@ -126,7 +126,7 @@ export default function Authenticated({ auth, children }) {
                                 </Link>
                             </li>
                             <li>
-                                <Link href={route('dashboard')} className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <Link href={route('absensi')} className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <span className="flex-1 ml-3 whitespace-nowrap">Data Absensi</span>
                                 </Link>
                             </li>
