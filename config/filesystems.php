@@ -36,6 +36,14 @@ return [
             'throw' => false,
         ],
 
+        'public_pub' => [
+            'driver' => 'local',
+            'root' => base_path('public'),
+            'url' => env('APP_URL'),
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

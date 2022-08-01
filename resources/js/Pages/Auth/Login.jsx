@@ -30,6 +30,11 @@ export default function Login({ status, canResetPassword }) {
                 username: user.username,
                 password: user.password,
                 is_admin: user.is_admin,
+                profile: user.profile,
+                jenisKelamin: user.jenisKelamin,
+                jabatan: user.jabatan.nama,
+                created_at: user.created_at,
+                status: user.status,
                 id: user.id
             })
         } else {
@@ -63,6 +68,7 @@ export default function Login({ status, canResetPassword }) {
                     jenisKelamin: "Laki-Laki",
                     status: "Karyawan Tetap",
                     is_admin: "true",
+                    created_at: new Date()
                 })
             }
         })

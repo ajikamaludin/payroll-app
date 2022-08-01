@@ -32,9 +32,27 @@ async function deleteById(id) {
   return result
 }
 
+async function uploadImage(url = '', profile) {
+  const formData = new FormData();
+
+  formData.append('profile', profile);
+  return await fetch(url, {
+  method: 'POST',
+  body: formData
+  })
+  .then(res => res.json())
+  .then(res => {
+    return res
+  })
+  .catch((error) => {
+    throw error
+  });
+}
+
 export {
   getAll,
   create,
   update,
-  deleteById
+  deleteById,
+  uploadImage
 }

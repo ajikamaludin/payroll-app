@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { toast } from 'react-toastify'
 import { Modal } from '@/Components/Modal'
 import { useForm } from '@inertiajs/inertia-react'
 import Button from '@/Components/Button'
 import Input from '@/Components/Input'
-import { create, update } from '@/Services/Karyawan'
+import { create, update, uploadImage } from '@/Services/Karyawan'
 import { getAll as GetAllJabatan } from '@/Services/Jabatan'
 
 export default function FormModal({ modalState, refresh }) {
@@ -17,9 +17,11 @@ export default function FormModal({ modalState, refresh }) {
         jenisKelamin: "Laki-Laki",
         jabatan: '',
         status: 'Karyawan Tetap',
-        is_admin: false
+        is_admin: false,
+        created_at: new Date()
     })
-
+    const [profile, setProfile] = useState(null)
+    const inputProfile = useRef()
     const [jabatans, setJabatans] = useState([])
 
     useEffect(() => {
@@ -29,11 +31,13 @@ export default function FormModal({ modalState, refresh }) {
 
     useEffect(() => {
         if (modalState.isOpen === false) {
+            setProfile(null)
             reset()
             modalState.setData(null)
         }
         if (modalState.data !== null) {
             setData(modalState.data.data)
+            setProfile(modalState.data.data.profile)
         }
     }, [modalState])
 
@@ -61,11 +65,12 @@ export default function FormModal({ modalState, refresh }) {
         })
     }
 
-    const submit = (e) => {
-        e.preventDefault()
-        setLoading(true)
+    const UpdateOrSave = (image) => {
         if (modalState.data !== null) {
-            update(data, modalState.data.id)
+            update({
+                ...data,
+                profile: image
+            }, modalState.data.id)
             .finally(() => {
                 reset()
                 toast.success("berhasil update")
@@ -74,7 +79,10 @@ export default function FormModal({ modalState, refresh }) {
                 refresh()
             })
         } else {
-            create(data)
+            create({
+                ...data,
+                profile: image
+            })
             .then((id) => console.log(id))
             .finally(() => {
                 reset()
@@ -83,6 +91,26 @@ export default function FormModal({ modalState, refresh }) {
                 modalState.toggle()
                 refresh()
             })
+        }
+    }
+
+    const submit = (e) => {
+        e.preventDefault()
+        setLoading(true)
+        console.log(typeof(profile))
+        if(typeof(profile) != "string") {
+            if (profile == null) {
+                alert('foto profile belum diisi')
+                return
+            }
+            uploadImage(route('upload.image'), profile)
+            .then(image => {
+                console.log(image.file_name)
+                UpdateOrSave(image.file_name)
+            })
+            .catch((err) => console.log(err))
+        } else {
+            UpdateOrSave(profile)
         }
     }
 
@@ -193,6 +221,27 @@ export default function FormModal({ modalState, refresh }) {
                         </option>
                     ))}
                 </select>
+            </label>
+            <label className="block text-sm mt-4">
+                <div className="text-gray-700 dark:text-gray-400">
+                    Photo
+                </div>
+                <Button
+                    onClick={() => {
+                        console.log(inputProfile.current.click())
+                    }}
+                >
+                    {profile ? typeof(profile) == "string" ? `${data.name}.png` : profile.name : 'Choose File'}
+                </Button>
+                <input
+                    type='file'
+                    placeholder="John Doe"
+                    name="profile"
+                    ref={inputProfile}
+                    className="hidden"
+                    onChange={(e) => setProfile(e.target.files[0])}
+                    accept="image/png, image/jpeg, image/jpg"
+                />
             </label>
             <label className="block text-sm mt-4">
                 <span className="text-gray-700 dark:text-gray-400">
