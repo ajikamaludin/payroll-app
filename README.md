@@ -1,7 +1,7 @@
 # Payroll App - Laravel inertiajs - firebase
 
 laravel Payroll App Example with inertiajs - react with tailwind and firebase firestore
-record employesss and absent to print payments invoices for Indonesian workers
+multiple user login admin and employess user, record employesss and absent to print payments invoices for Indonesian workers
 ## Support me
 
 <a href="https://trakteer.id/ajikamaludin" target="_blank"><img id="wse-buttons-preview" src="https://cdn.trakteer.id/images/embed/trbtn-blue-2.png" height="40" style="border:0px;height:40px;" alt="Trakteer Saya"></a>
@@ -20,6 +20,12 @@ $ cp resources/js/firebase.js.example resources/js/firebase.js # configure your 
 $ composer install
 $ npm install
 $ npm run dev # compiling asset for development
+```
+
+## Default User 
+```
+username : admin
+password : admin
 ```
 
 ## Compile Assets ( to prod )
